@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment2b-1 TTT3 DGMD28 Devon</title>
+    <style>
+
+  #board {
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    grid-template-rows: 33% 33% 33%;
+    max-width: 300px;
+  }
+
+  .square{
+    border: 2px solid rgb(192,192,192);
+    border-radius: 5px;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center; 
+    margin:5px;
+    font-size:90px;
+    }  
+
+    .square:hover {
+    background: lightgrey;
+    }
+    
+    /* Style for Turn and Game Progress place holders */
+   .turn_section{
+    border: 2px solid rgb(0,0,255);
+    width:300px;
+    font-size:30px;
+    text-align: center; 
+   }
+
+    .game_progress{
+    border: 2px solid rgb(2,48,32);
+    width:300px;
+    font-size:30px;
+
+   }
+    </style>
+</head>
+
+<body>
+  <h1>This is Devon's TTT4</h1>
+  <!-- Placeholder for the player's turn message TT4-->
+  <div id="players_turn_status" class = turn_section></div>
+
+    <script>
+    // Player's turn defaults to 0 (O's turn)
+    player_var = 0
+    // Generates a random number between 0 to 1. Above .5 will lead to X's turn, otherwise 0. Player_var and Turn Status both updated accordingly.
+    let randomNum = Math.random()
+    if (randomNum>.5)
+    {
+      player_var = 1
+      alert("X will go first")
+      players_turn_status.innerHTML = "X's Turn";
+    }
+
+    else
+    {
+      alert("O will go first")
+      players_turn_status.innerHTML = "O's Turn";
+    }
+  </script>
+  
+  <div id="board">
+    <script>
+      const NUM_SQUARES = 9;
+      for (i=0; i<NUM_SQUARES; i++)
+        {
+            id = "sq"+i;
+            document.write( "<div class='square' id='" + id + "'></div>");
+        }    
+        
+        window.onload= function() 
+      {
+        //Pulls in all objects with the classname square
+        const squares = document.getElementsByClassName("square")
+        
+        for(let i = 0; i < squares.length; i++){
+          // Pulls out each object one by one based upon the id (sq0-sq8)
+          square = document.getElementById("sq"+i);
+          // If click occurs, X will be added to single object of squares array and message will be displayed.
+          square.addEventListener("click", function(){
+            // Adds text content for clicked square into variable. If that variables is blank, and equal to 1 adds X. Blank and equal to 0 will add an O. Player_var is changed in order to change the turn from X to O.
+            current_square_value = squares[i].textContent
+            if ((current_square_value == "") && (player_var == 1))
+            {
+              squares[i].textContent = "X";
+              player_var = 0;
+              players_turn_status.innerHTML = "O's Turn";
+              alert("Square # " + i);
+            } 
+            else if ((current_square_value == "") && (player_var == 0))
+            {
+              squares[i].textContent = "O";
+              player_var = 1;
+              players_turn_status.innerHTML = "X's Turn";
+              alert("Square # " + i);
+            }
+          })
+        }
+      }
+    </script> 
+  </div>
+<h1>End of Javascript</h1>
+<!--  These are the sections I created to indicate turn and game status later -->
+<div class ="game_progress">Game Status:  </div>
+</body>
+</html>
